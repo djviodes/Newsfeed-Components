@@ -86,6 +86,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'David Drank Some Water',
+    date: 'Jun 21st, 2020',
+    firstParagraph: `David really drank that water quickly. Poor guy must have been thirsty. But who really knows in this whacked out whacky whacked world we live in. I am trying to think of more random things to type but I have two more paragraphs to fill so I need to save something for that. Whacky. `,
+
+    secondParagraph: `I think I'm just going to leave the rest of the text the way it is; 
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -102,15 +116,66 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
+  
+const article = document.querySelector('.articles')
 
+function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const paraOne = document.createElement('p')
+  const paraTwo = document.createElement('p')
+  const paraThree = document.createElement('p')
+  const expandButton = document.createElement('span')
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(paraOne)
+  article.appendChild(paraTwo)
+  article.appendChild(paraThree)
+  article.appendChild(expandButton)
+
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  expandButton.classList.add('expandButton')
+
+  articleTitle.textContent = title
+  articleDate.textContent = date
+  paraOne.textContent = firstParagraph
+  paraTwo.textContent = secondParagraph
+  paraThree.textContent = thirdParagraph
+  expandButton.textContent = '+'
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
+*/
 
+  expandButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open')
+  })
+
+/*
   Step 3: Don't forget to return something from your function!
+*/
 
+  return article
+}
+
+/*
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+*/
 
+data.forEach(objectArticle => {
+  const {title, date, firstParagraph, secondParagraph, thirdParagraph} = objectArticle
+  const articleTwo = makeArticle(title, date, firstParagraph, secondParagraph, thirdParagraph)
+  article.appendChild(articleTwo)
+})
+
+/*
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
