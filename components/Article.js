@@ -120,8 +120,8 @@ const data = [
   
 const article = document.querySelector('.articles')
 
-function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
-  
+function makeArticle(Article){
+
   const article = document.createElement('div')
   const articleTitle = document.createElement('h2')
   const articleDate = document.createElement('p')
@@ -141,11 +141,11 @@ function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagrap
   articleDate.classList.add('date')
   expandButton.classList.add('expandButton')
 
-  articleTitle.textContent = title
-  articleDate.textContent = date
-  paraOne.textContent = firstParagraph
-  paraTwo.textContent = secondParagraph
-  paraThree.textContent = thirdParagraph
+  articleTitle.textContent = Article.title
+  articleDate.textContent = Article.date
+  paraOne.textContent = Article.firstParagraph
+  paraTwo.textContent = Article.secondParagraph
+  paraThree.textContent = Article.thirdParagraph
   expandButton.textContent = '+'
 
 /*
@@ -153,7 +153,7 @@ function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagrap
   This listener should toggle the class 'article-open' on div.article.
 */
 
-  expandButton.addEventListener('click', (event) => {
+  expandButton.addEventListener('click', () => {
     article.classList.toggle('article-open')
   })
 
@@ -162,6 +162,7 @@ function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagrap
 */
 
   return article
+
 }
 
 /*
@@ -170,8 +171,7 @@ function makeArticle(title, date, firstParagraph, secondParagraph, thirdParagrap
 */
 
 data.forEach(objectArticle => {
-  const {title, date, firstParagraph, secondParagraph, thirdParagraph} = objectArticle
-  const articleTwo = makeArticle(title, date, firstParagraph, secondParagraph, thirdParagraph)
+  const articleTwo = makeArticle(objectArticle)
   article.appendChild(articleTwo)
 })
 
